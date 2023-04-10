@@ -2,43 +2,38 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
+    <asp:Panel runat="server" ID="Panel2" HorizontalAlign="Center">
+        <main>
+            <section class="row" aria-labelledby="Title">
+                <h1 id="Title">Sign in</h1>
+                <p class="lead">Please enter your e-mail and password to continue.</p>
+            </section>
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
-        </div>
-    </main>
+            <div "Data">
+                <asp:Label runat="server" Text="Email"></asp:Label>
+
+                <br />
+                <asp:TextBox runat="server" ID="text_email"></asp:TextBox>
+
+                <br />
+                <asp:Label runat="server" Text="Insert a valid email" ID="label_error_email" ForeColor="#FF3300"></asp:Label>
+                
+                <br />
+                <asp:Label runat="server" Text="Password"></asp:Label>
+
+                <br />
+                <asp:TextBox runat="server" TextMode="Password" ID="text_password"></asp:TextBox>
+
+                <br />
+                <asp:Label runat="server" Text="Insert a valid password" ID="label_error_password" ForeColor="#FF3300"></asp:Label>
+
+                <br />
+                <br />
+                <asp:Button runat="server" Text="Sign in" BorderStyle="Solid" OnClick="Sing_In_Button_Pressed"></asp:Button>
+                <br />
+                <asp:Label runat="server" Text=" Wrong email or password" ID="label_error_signin" ForeColor="#FF3300"></asp:Label>
+            </div>
+        </main>
+    </asp:Panel>
 
 </asp:Content>
