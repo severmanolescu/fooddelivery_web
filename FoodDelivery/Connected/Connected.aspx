@@ -12,8 +12,24 @@
         </address>
 
         <address>
-            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <asp:Label runat="server" ID="label"></asp:Label>
+
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><asp:Panel runat="server"></asp:Panel>
+            <br />
             <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
         </address>
+
+        <asp:Panel ID="panel_orders" runat="server">
+
+            <asp:Table ID="myTable" runat="server" Width="100%"> 
+                <asp:TableRow>
+                    <asp:TableCell>ID</asp:TableCell>
+                    <asp:TableCell>Date</asp:TableCell>
+                    <asp:TableCell>Items</asp:TableCell>
+                    <asp:TableCell>Status</asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>  
+
+        </asp:Panel>
     </main>
 </asp:Content>

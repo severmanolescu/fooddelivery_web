@@ -2,6 +2,7 @@
 using System.Web.UI;
 using Firebase.Auth;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace FoodDelivery
 {
@@ -41,7 +42,7 @@ namespace FoodDelivery
             return validEmail && validPassword;
         }
         
-        static async System.Threading.Tasks.Task<bool> Try_To_Connect(String email, String password)
+        static async Task<FirebaseAuthLink> Try_To_Connect(String email, String password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyBF7qaCQxjHkDZC2fKKxKFAMeJB5w2HYP8"));
 
@@ -49,27 +50,42 @@ namespace FoodDelivery
             {
                 var authResult = await auth.SignInWithEmailAndPasswordAsync(email, password);
 
-                return true;
+                return authResult;
             }
             catch
             {
-                return false;
+                return null;
             }
+        }
+
+        static async Task<String> Wait_To_Sign_in(TextBox email, TextBox password)
+        {
+            var task = await Try_To_Connect(email.Text, password.Text);
+
+            if(task != null)
+            {
+                return task.User.LocalId;
+            }
+
+            return String.Empty;
         }
 
         protected void Sing_In_Button_Pressed(object sender, EventArgs e)
         {
-            if(Check_Input_Data())
+            if (Check_Input_Data())
             {
-                Task<bool> task = Task<bool>.Run(async () => await Try_To_Connect(text_email.Text, text_password.Text));
+                Task<String> task = Task<String>.Run(async () => await Wait_To_Sign_in(text_email, text_password));
 
-                if(task.Result)
+                if(task.Result == String.Empty)
                 {
-                    label_error_signin.Visible = false;
+                    label_error_signin.Visible = true;
                 }
                 else
                 {
-                    label_error_signin.Visible = true;
+                    Application["user_id"] = task.Result;
+
+                    string url = "../Connected/Connected.aspx";
+                    Response.Redirect(url);
                 }
             }
         }
