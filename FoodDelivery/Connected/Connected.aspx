@@ -1,15 +1,9 @@
-﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="FoodDelivery.Contact" %>
+﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="FoodDelivery.Contact" %>
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
     <main aria-labelledby="title">
-        <h2 id="title"><%: Title %>.</h2>
-        <h3>Your contact page.</h3>
-        <address>
-            One Microsoft Way<br />
-            Redmond, WA 98052-6399<br />
-            <abbr title="Phone">P:</abbr>
-            425.555.0100
-        </address>
 
         <address>
             <asp:Label runat="server" ID="label"></asp:Label>
@@ -21,15 +15,21 @@
 
         <asp:Panel ID="panel_orders" runat="server">
 
-            <asp:Table ID="myTable" runat="server" Width="100%"> 
-                <asp:TableRow>
-                    <asp:TableCell>ID</asp:TableCell>
-                    <asp:TableCell>Date</asp:TableCell>
-                    <asp:TableCell>Items</asp:TableCell>
-                    <asp:TableCell>Status</asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>  
+            <asp:GridView ID="grid_Orders" runat="server" Width="100%" AllowSelection="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            </asp:GridView>
 
         </asp:Panel>
+
     </main>
+
+    <style>
+        .button-label {
+            display: inline-block;
+            padding: 6px 12px;
+            color: #337ab7;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </asp:Content>

@@ -1,52 +1,63 @@
-﻿using Google.Api.Gax.ResourceNames;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Firebase.Database;
 
 namespace FoodDelivery
 {
     public partial class Contact : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
-            Application["e-mail"] = "qgT6LlkQ1pRmJDN9HXSxRWkBhzA2";
+            Application["user_id"] = "qgT6LlkQ1pRmJDN9HXSxRWkBhzA2";
 
-            //label.Text = Application["user_id"].ToString();
+            grid_Orders.EnableViewState = true;
 
-
-            panel_orders.Controls.Add(new Label { Text = "asdasdasdasd" });
+            await Firebase_Get_Data();
         }
 
-        protected TableRow Row_Generator()
+        protected void Add_Orders_To_Table(Orders orders)
         {
-            TableRow row = new TableRow();
+            DataTable dataTable = new DataTable();
 
-            TableCell orderID = new TableCell();
-            orderID.Text = "1";
+            dataTable.Columns.Add("NO", typeof(int));
+            dataTable.Columns.Add("Date", typeof(string));
+            dataTable.Columns.Add("Items", typeof(string));
+            dataTable.Columns.Add("Status", typeof(string));
 
-            TableCell orderDate = new TableCell();
-            orderDate.Text = "2";
+            foreach(Data data in orders.orders)
+            {
+                dataTable.Rows.Add(0, data.Date.ToString(), data.Items[0], data.Status);
+            }
 
-            TableCell orderItems = new TableCell();
-            orderItems.Text = "3";
-
-            TableCell orderStatus = new TableCell();
-            orderStatus.Text = "4";
-
-            row.Cells.Add(orderID);
-            row.Cells.Add(orderDate);
-            row.Cells.Add(orderItems);
-            row.Cells.Add(orderStatus);
-
-            return row;
+            grid_Orders.DataSource = dataTable;
+            grid_Orders.DataBind();
         }
 
-        protected void Add_Orders_To_Table()
+        private async Task Firebase_Get_Data()
         {
-            myTable.Rows.Add(Row_Generator());
+            // Initialize the Firebase client
+            var firebaseClient = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
+
+            // Retrieve data from the "users" node in the database
+            var orders = await firebaseClient.Child("Restaurants").OnceAsync<Orders>();
+
+            foreach(var order in orders)
+            {
+                if(order.Key == Application["user_id"].ToString())
+                {
+                    Add_Orders_To_Table(order.Object);
+
+                    break;
+                }
+            }
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int a = 3;
         }
     }
 }
