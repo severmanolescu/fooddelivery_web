@@ -246,3 +246,6 @@ D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Microsoft.CodeDom.Providers.D
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\obj\Debug\FoodDelivery.csproj.CopyComplete
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\obj\Debug\FoodDelivery.dll
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\obj\Debug\FoodDelivery.pdb
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\BouncyCastle.Crypto.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\jose-jwt.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\NetLegacySupport.Tuple.dll
