@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Firebase.Database;
 using System.Collections.Generic;
+using Google.Cloud.Firestore;
+using System.Diagnostics;
 
 namespace FoodDelivery
 {
@@ -26,6 +28,8 @@ namespace FoodDelivery
             Application["user_id"] = "qgT6LlkQ1pRmJDN9HXSxRWkBhzA2";
 
             await Firebase_Get_Data();
+
+            Timer1.Enabled = true;
         }
 
         private string Get_String_Items(List<Item> items)
@@ -39,6 +43,7 @@ namespace FoodDelivery
 
             return itemsString;
         }
+
 
         protected void Add_Orders_To_Table()
         {
@@ -93,6 +98,11 @@ namespace FoodDelivery
                     break;
                 }
             }
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Firebase_Get_Data();
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -157,8 +167,9 @@ namespace FoodDelivery
             int height = 300 + orderDetails.data.items.Count * 40;
 
             string url = "OrderView.aspx?data=" + encodedData;
-            string s = $"window.open('" + url + "', 'popup_window', 'width=600,height=" + height.ToString() + ",left=100,top=100,resizable=no');";
-            ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+            string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=600');";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OrderView", script, true);
         }
     }
 }

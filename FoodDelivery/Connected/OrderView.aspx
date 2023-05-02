@@ -1,4 +1,4 @@
-﻿<%@ Page Title="OrderView" Language="C#" MasterPageFile="~/Site.Master" Async="true" CodeBehind="OrderView.aspx.cs" Inherits="FoodDelivery.OrderView" %>
+﻿<%@ Page Title="OrderView" Language="C#" MasterPageFile="../MasterPages/MasterSignin.Master" Async="true" CodeBehind="OrderView.aspx.cs" Inherits="FoodDelivery.OrderView" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">

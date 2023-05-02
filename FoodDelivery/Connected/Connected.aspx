@@ -1,10 +1,11 @@
-﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" EnableEventValidation="true" CodeBehind="Connected.aspx.cs" Inherits="FoodDelivery.Contact" %>
+﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="../MasterPages/MasterConnected.Master" Async="true" AutoEventWireup="true" EnableEventValidation="true" CodeBehind="Connected.aspx.cs" Inherits="FoodDelivery.Contact" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <main aria-labelledby="title">
-        
+
+        <asp:Timer ID="Timer1" runat="server" Interval="30000" OnTick="Timer1_Tick"></asp:Timer>
 
         <asp:Panel ID="panel_orders" runat="server">
 
@@ -18,7 +19,7 @@
                     <asp:BoundField DataField="Date" HeaderText="Date" />
                     <asp:BoundField DataField="Status" HeaderText="Status" />
 
-                    <asp:CommandField ShowSelectButton="True" ></asp:CommandField>
+                    <asp:CommandField ShowSelectButton="True"></asp:CommandField>
                 </Columns>
             </asp:GridView>
 

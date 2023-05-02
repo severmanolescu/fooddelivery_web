@@ -1,4 +1,4 @@
-﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="FoodDelivery.About" %>
+﻿<%@ Page Title="About" Language="C#" MasterPageFile="../MasterPages/MasterSignin.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="FoodDelivery.About" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel runat="server" ID="Panel2" HorizontalAlign="Center">

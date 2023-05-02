@@ -11,7 +11,7 @@ namespace FoodDelivery
 {
 
 
-    public partial class SiteMaster
+    public partial class MasterSignin
     {
 
         /// <summary>
