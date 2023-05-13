@@ -249,3 +249,10 @@ D:\Facultate\ADA\fooddelivery_web\FoodDelivery\obj\Debug\FoodDelivery.pdb
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\BouncyCastle.Crypto.dll
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\jose-jwt.dll
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\NetLegacySupport.Tuple.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Firebase.Storage.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.pdb
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.xml
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.pdb
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.xml

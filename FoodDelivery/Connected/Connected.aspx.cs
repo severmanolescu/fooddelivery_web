@@ -8,14 +8,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Firebase.Database;
 using System.Collections.Generic;
-using Google.Cloud.Firestore;
-using System.Diagnostics;
+using System.IO;
+using Firebase.Storage;
+using System.Net.Http;
+using Firebase.Database.Query;
 
 namespace FoodDelivery
 {
     public partial class Contact : Page
     {
-        Orders restaurantOrders;
+        Order restaurantOrders;
 
         Color lightRed =         Color.FromArgb(2, 252, 212, 212);
         Color lightYellow =      Color.FromArgb(2, 250, 250, 212);
@@ -25,6 +27,27 @@ namespace FoodDelivery
 
         protected async void Page_Load(object sender, EventArgs e)
         {
+
+            // Replace "my-project-id" and "my-bucket" with your Firebase project ID and storage bucket name, respectively.
+            var bucket = "timisoara-83e5b.appspot.com";
+
+            // Replace "C:\path\to\myfile.jpg" with the path to your local file.
+            var path = @"D:\5977588.png";
+
+            // Read the contents of the local file into a byte array.
+            var data = File.ReadAllBytes(path);
+
+            // Set up the HTTP client.
+            var client = new HttpClient();
+            client.BaseAddress = new Uri($"https://storage.googleapis.com/{bucket}/");
+
+            // Create a new HTTP PUT request with the file data as the request body.
+            var request = new HttpRequestMessage(HttpMethod.Put, "myfile.png");
+            request.Content = new ByteArrayContent(data);
+
+            // Send the HTTP request and get the response.
+            var response = await client.SendAsync(request);
+
             Application["user_id"] = "qgT6LlkQ1pRmJDN9HXSxRWkBhzA2";
 
             await Firebase_Get_Data();
@@ -85,7 +108,7 @@ namespace FoodDelivery
         {
             var firebaseClient = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            var orders = await firebaseClient.Child("Restaurants").OnceAsync<Orders>();
+            var orders = await firebaseClient.Child("Restaurants").OnceAsync<Order>();
 
             foreach(var order in orders)
             {
@@ -170,6 +193,16 @@ namespace FoodDelivery
             string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=600');";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "OrderView", script, true);
+        }
+
+        protected void FoodPageLoad(object sender, EventArgs e)
+        {
+            int height = 500;
+
+            string url = "FoodShow.aspx?link=" + Server.UrlEncode(restaurantOrders.link) + "&name=" + Server.UrlEncode(restaurantOrders.name);
+            string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=600');";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Food", script, true);
         }
     }
 }

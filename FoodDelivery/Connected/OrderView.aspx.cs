@@ -62,12 +62,12 @@ namespace FoodDelivery
                                            item.name,
                                            item.amount);
 
-                        grid_Items.DataSource = dataTable;
-                        grid_Items.DataBind();
-
                         grid_Items.DataSource = null;
                     }
                 }
+
+                grid_Items.DataSource = dataTable;
+                grid_Items.DataBind();
             }
         }
 
