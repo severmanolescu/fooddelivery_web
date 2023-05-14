@@ -11,25 +11,34 @@ namespace FoodDelivery
 {
 
 
-    public partial class Connected
+    public partial class ContactConnected
     {
 
         /// <summary>
-        /// panel_orders control.
+        /// Panel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel_orders;
+        protected global::System.Web.UI.WebControls.Panel Panel2;
 
         /// <summary>
-        /// grid_Orders control.
+        /// myTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid_Orders;
+        protected global::System.Web.UI.WebControls.Table myTable;
+
+        /// <summary>
+        /// buttonEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonEmail;
     }
 }

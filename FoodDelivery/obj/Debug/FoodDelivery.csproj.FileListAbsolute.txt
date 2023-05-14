@@ -256,3 +256,4 @@ D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.pdb
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.xml
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.pdb
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.xml
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\FirebaseNetAdmin.dll

@@ -8,14 +8,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Firebase.Database;
 using System.Collections.Generic;
-using System.IO;
-using Firebase.Storage;
-using System.Net.Http;
-using Firebase.Database.Query;
 
 namespace FoodDelivery
 {
-    public partial class Contact : Page
+    public partial class Connected : Page
     {
         Order restaurantOrders;
 
@@ -29,35 +25,26 @@ namespace FoodDelivery
 
         protected async void Page_Load(object sender, EventArgs e)
         {
-
-            // Replace "my-project-id" and "my-bucket" with your Firebase project ID and storage bucket name, respectively.
-            var bucket = "timisoara-83e5b.appspot.com";
-
-            // Replace "C:\path\to\myfile.jpg" with the path to your local file.
-            var path = @"D:\5977588.png";
-
-            // Read the contents of the local file into a byte array.
-            var data = File.ReadAllBytes(path);
-
-            // Set up the HTTP client.
-            var client = new HttpClient();
-            client.BaseAddress = new Uri($"https://storage.googleapis.com/{bucket}/");
-
-            // Create a new HTTP PUT request with the file data as the request body.
-            var request = new HttpRequestMessage(HttpMethod.Put, "myfile.png");
-            request.Content = new ByteArrayContent(data);
-
-            // Send the HTTP request and get the response.
-            var response = await client.SendAsync(request);
-
-            Application["user_id"] = "qgT6LlkQ1pRmJDN9HXSxRWkBhzA2";
+            Environment.SetEnvironmentVariable(
+            "GOOGLE_APPLICATION_CREDENTIALS",
+            @"D:\timisoara-83e5b-firebase-adminsdk-64hs9-31b93d7503.json");
 
             await Firebase_Get_Data();
 
-            Timer1.Enabled = true;
+            SetListener();
         }
 
-        private string Get_String_Items(List<Item> items)
+        private void SetListener()
+        {
+            FirebaseClient firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
+
+            firebase.Child("Restaurants").AsObservable<object>().Subscribe(async data =>
+            {
+                 await Firebase_Get_Data();
+            });
+        }
+
+        private string GetStringItems(List<Item> items)
         {
             string itemsString = "";
 
@@ -69,7 +56,7 @@ namespace FoodDelivery
             return itemsString;
         }
 
-        private void Add_Orders_With_Status(DataTable dataTable, string status)
+        private void AddOrdersWithStatus(DataTable dataTable, string status)
         {
             int orderIndex = 0;
 
@@ -82,7 +69,7 @@ namespace FoodDelivery
                     DataRow dataRow = dataTable.NewRow();
 
                     dataRow["NO"] = orderIndex;
-                    dataRow["Items"] = Get_String_Items(data.items);
+                    dataRow["Items"] = GetStringItems(data.items);
                     dataRow["Address"] = data.address;
                     dataRow["Person"] = data.person;
                     dataRow["Phone"] = data.phone;
@@ -96,7 +83,7 @@ namespace FoodDelivery
             }
         }
 
-        private void Add_Orders_To_Table()
+        private void AddOrdersToTable()
         {
             DataTable dataTable = new DataTable();
 
@@ -111,7 +98,7 @@ namespace FoodDelivery
 
             foreach(string order in ordersOrder)
             {
-                Add_Orders_With_Status(dataTable, order);
+                AddOrdersWithStatus(dataTable, order);
             }
 
             grid_Orders.DataSource = dataTable;
@@ -130,16 +117,11 @@ namespace FoodDelivery
                 {
                     restaurantOrders = order.Object;
 
-                    Add_Orders_To_Table();
+                    AddOrdersToTable();
 
                     break;
                 }
             }
-        }
-
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            Firebase_Get_Data();
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)

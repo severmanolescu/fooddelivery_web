@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace FoodDelivery
 {
-    public partial class Contact : Page
+    public partial class ContactConnected : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

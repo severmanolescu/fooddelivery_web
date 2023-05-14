@@ -8,6 +8,8 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System.Web.DynamicData;
 using System.Windows.Forms;
+using Google.Cloud.Storage.V1;
+using System.IO;
 
 namespace FoodDelivery
 {
@@ -96,13 +98,43 @@ namespace FoodDelivery
             }
         }
 
+        private string UploadImage()
+        {
+            string bucketName = "timisoara-83e5b.appspot.com";
+
+            string filePath = Path.Combine("D:\\Images", fileUpload.FileName);
+
+            var storage = StorageClient.Create();
+
+            string url = @"https://storage.googleapis.com/timisoara-83e5b.appspot.com";
+
+            using (var fileStream = File.OpenRead(filePath))
+            {
+                string folderName = "food/" + restaurantName;
+
+                string fileExtension = fileUpload.FileName.Split('.')[1];
+
+                var objectName = $"{folderName}/{textbox_Name.Text}.{fileExtension}";
+
+                storage.UploadObject(bucketName, objectName, null, fileStream);
+
+                url += "/" + objectName;
+            }
+
+            return url;
+        }
+
         protected async Task SendData()
         {
             try
             {
                 var firebase = new FirebaseClient(foodLink);
 
-                Food food = new Food { name = textbox_Name.Text, price = textbox_Price.Text, image = "Test"};
+                Food food = new Food { name = textbox_Name.Text, price = textbox_Price.Text};
+
+                string url = UploadImage();
+
+                food.image = url;
 
                 int index = 0;
 
@@ -146,9 +178,28 @@ namespace FoodDelivery
             addFood_Button.Enabled = true;
         }
 
+        private bool CheckFoodName()
+        {
+            foreach(GridViewRow row in grid_Items.Rows) 
+            {
+                if(row.Cells.Count > 0 && row.Cells[1].Text == textbox_Name.Text) 
+                {
+                    error_Label.Text = "This item already exist, please insert another one!";
+
+                    error_Label.Visible = true;
+
+                    return false;
+                }
+            }
+
+            error_Label.Visible = false;
+
+            return true;
+        }
+
         private bool CheckData()
         {
-            if(textbox_Name.Text != string.Empty && textbox_Price.Text != string.Empty)
+            if(textbox_Name.Text != string.Empty && textbox_Price.Text != string.Empty && fileUpload.HasFile)
             {
                 try
                 {
@@ -156,7 +207,7 @@ namespace FoodDelivery
 
                     error_Label.Visible = false;
 
-                    return true;
+                    return CheckFoodName();
                 }
                 catch
                 {

@@ -11,7 +11,7 @@ namespace FoodDelivery
 {
 
 
-    public partial class About
+    public partial class Contact
     {
 
         /// <summary>

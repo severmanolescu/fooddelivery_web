@@ -1,6 +1,25 @@
-﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="../MasterPages/MasterSignin.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="FoodDelivery.Contact" %>
+﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="../MasterPages/MasterConnected.Master" AutoEventWireup="true" CodeBehind="ContactConnected.aspx.cs" Inherits="FoodDelivery.ContactConnected" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <asp:Panel runat="server" Width="100%">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">Food Atlas</a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="Connected.aspx">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="ContactConnected.aspx">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </asp:Panel>
+
     <asp:Panel runat="server" ID="Panel2" HorizontalAlign="Center">
         <main>
 
