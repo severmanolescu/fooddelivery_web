@@ -204,5 +204,15 @@ namespace FoodDelivery
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Food", script, true);
         }
+
+        protected void DiscountPageLoad(object sender, EventArgs e)
+        {
+            int height = 150;
+
+            string url = "Discount.aspx?link=" + Server.UrlEncode(restaurantOrders.link) + "&name=" + Server.UrlEncode(restaurantOrders.name);
+            string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=400');";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Food", script, true);
+        }
     }
 }

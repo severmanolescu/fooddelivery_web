@@ -7,7 +7,7 @@
 
         <asp:Panel ID="panel_orders" runat="server">
 
-            <asp:Label ID="label_Error" runat="server">  </asp:Label>
+            <asp:Label ID="label_Error" runat="server" Visible ="false" ForeColor="Red">  </asp:Label>
             <br />
 
             <asp:GridView ID="grid_Items" runat="server" Width="100%" AutoGenerateColumns="False" OnRowDeleting="grid_Items_RowDeleting">
@@ -15,7 +15,6 @@
                     <asp:BoundField DataField="NO" HeaderText="NO" />
                     <asp:BoundField DataField="Name" HeaderText="Name" />
                     <asp:BoundField DataField="Price" HeaderText="Price" />
-                    <asp:BoundField DataField="ActualIndex" HeaderText="ActualIndex" Visible="false" />
                     <asp:CommandField ShowDeleteButton="True"></asp:CommandField>
                 </Columns>
             </asp:GridView>

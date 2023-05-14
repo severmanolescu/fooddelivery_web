@@ -26,7 +26,9 @@ namespace FoodDelivery
             }
             catch
             {
-                label_Address.Text = "Something went wrong! Try again!";
+                label_Error.Text = "Something went wrong! Try again!";
+
+                label_Error.Visible = true;
             }
         }
 

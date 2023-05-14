@@ -15,6 +15,8 @@
             <br />
             <asp:Label ID="label_Date" runat="server">  </asp:Label>
             <br />
+            <asp:Label ID="label_Error" runat="server" Visible ="false" ForeColor="Red">  </asp:Label>
+
 
             <asp:Label ID="label_Status" runat="server"> Status: </asp:Label>
 

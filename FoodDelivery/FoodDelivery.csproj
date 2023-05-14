@@ -379,6 +379,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Connected\Discount.aspx" />
     <Content Include="Connected\FoodShow.aspx" />
     <Content Include="Connected\OrderView.aspx" />
     <Content Include="Initial\Contact.aspx" />
@@ -467,6 +468,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Connected\Discount.aspx.cs">
+      <DependentUpon>Discount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Connected\Discount.aspx.designer.cs">
+      <DependentUpon>Discount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Connected\FoodShow.aspx.cs">
       <DependentUpon>FoodShow.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

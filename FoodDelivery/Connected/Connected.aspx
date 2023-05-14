@@ -14,7 +14,8 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="Connected.aspx">Orders</a></li>
-                        <li class="nav-item"><asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" href="../Initial/Contact" Text="Food" OnClick="FoodPageLoad"></asp:Button></li>
+                        <li class="nav-item"><asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Food" OnClick="FoodPageLoad"></asp:Button></li>
+                        <li class="nav-item"><asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Discount" OnClick="DiscountPageLoad"></asp:Button></li>
                     </ul>
                 </div>
             </div>

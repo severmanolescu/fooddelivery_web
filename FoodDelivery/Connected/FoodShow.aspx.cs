@@ -32,6 +32,8 @@ namespace FoodDelivery
             {
                 label_Error.Text = "Something went wrong! Try again!";
 
+                label_Error.Visible = true;
+
                 addFood_Button.Enabled = false;
             }
         }
@@ -48,7 +50,6 @@ namespace FoodDelivery
                 dataTable.Columns.Add("NO", typeof(int));
                 dataTable.Columns.Add("Name", typeof(string));
                 dataTable.Columns.Add("Price", typeof(int));
-                dataTable.Columns.Add("ActualIndex", typeof(int));
 
                 int itemIndex = 0;
 
@@ -60,8 +61,7 @@ namespace FoodDelivery
                     {
                         dataTable.Rows.Add(realItemIndex,
                                            food.name,
-                                           food.price,
-                                           realItemIndex);
+                                           food.price);
 
                         itemIndex += 1;
 

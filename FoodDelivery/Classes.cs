@@ -43,9 +43,4 @@ public class Food
     public string name;
     public string price;
     public string image;
-
-    public Food()
-    {
-
-    }
 }
