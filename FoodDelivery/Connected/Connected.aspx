@@ -36,6 +36,7 @@
                     <asp:BoundField DataField="Person" HeaderText="Person" />
                     <asp:BoundField DataField="Phone" HeaderText="Phone" />
                     <asp:BoundField DataField="Date" HeaderText="Date" />
+                    <asp:BoundField DataField="Price" HeaderText="Price" />
                     <asp:BoundField DataField="Status" HeaderText="Status" />
 
                     <asp:CommandField ShowSelectButton="True"></asp:CommandField>

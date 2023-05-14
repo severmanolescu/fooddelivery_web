@@ -38,6 +38,9 @@
                 </Columns>
             </asp:GridView>
 
+            <br />
+            <asp:Label runat="server" ID="label_Price">Price: </asp:Label>
+
         </asp:Panel>
     </main>
 </asp:Content>

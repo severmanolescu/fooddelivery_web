@@ -68,6 +68,8 @@ namespace FoodDelivery
                     }
                 }
 
+                label_Price.Text += orderDetails.data.price.ToString();
+
                 grid_Items.DataSource = dataTable;
                 grid_Items.DataBind();
             }

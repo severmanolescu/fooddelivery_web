@@ -17,6 +17,7 @@ public class Data
     public string person;
     public string phone;
     public string status;
+    public int price;
 }
 
 public class Item

@@ -25,6 +25,8 @@ namespace FoodDelivery
         Color lightYellowGreen = Color.FromArgb(2, 253, 250, 212);
         Color lightBlue =        Color.FromArgb(2, 212, 215, 250);
 
+        string[] ordersOrder = { "Placed", "Accepted", "Out for Delivery", "Delivered", "Completed", "Canceled" };
+
         protected async void Page_Load(object sender, EventArgs e)
         {
 
@@ -67,8 +69,34 @@ namespace FoodDelivery
             return itemsString;
         }
 
+        private void Add_Orders_With_Status(DataTable dataTable, string status)
+        {
+            int orderIndex = 0;
 
-        protected void Add_Orders_To_Table()
+            foreach (Data data in restaurantOrders.orders)
+            {
+                if(data.status == status)
+                {
+                    data.index = orderIndex;
+
+                    DataRow dataRow = dataTable.NewRow();
+
+                    dataRow["NO"] = orderIndex;
+                    dataRow["Items"] = Get_String_Items(data.items);
+                    dataRow["Address"] = data.address;
+                    dataRow["Person"] = data.person;
+                    dataRow["Phone"] = data.phone;
+                    dataRow["Date"] = data.date.ToString("dd/MM/yyyy");
+                    dataRow["Status"] = data.status;
+                    dataRow["Price"] = data.price;
+
+                    dataTable.Rows.Add(dataRow);
+                }
+                orderIndex += 1;
+            }
+        }
+
+        private void Add_Orders_To_Table()
         {
             DataTable dataTable = new DataTable();
 
@@ -78,26 +106,12 @@ namespace FoodDelivery
             dataTable.Columns.Add("Person", typeof(string));
             dataTable.Columns.Add("Phone", typeof(string));
             dataTable.Columns.Add("Date", typeof(string));
+            dataTable.Columns.Add("Price", typeof(int));
             dataTable.Columns.Add("Status", typeof(string));
 
-            int orderIndex = 0;
-
-            foreach(Data data in restaurantOrders.orders)
+            foreach(string order in ordersOrder)
             {
-                data.index = orderIndex;
-                orderIndex++;
-
-                DataRow dataRow = dataTable.NewRow();
-
-                dataRow["NO"] = orderIndex;
-                dataRow["Items"] = Get_String_Items(data.items);
-                dataRow["Address"] = data.address;
-                dataRow["Person"] = data.person;
-                dataRow["Phone"] = data.phone;
-                dataRow["Date"] = data.date.ToString("dd/MM/yyyy");
-                dataRow["Status"] = data.status;
-
-                dataTable.Rows.Add(dataRow);
+                Add_Orders_With_Status(dataTable, order);
             }
 
             grid_Orders.DataSource = dataTable;
@@ -132,7 +146,7 @@ namespace FoodDelivery
         {
             foreach (GridViewRow row in grid_Orders.Rows)
             {
-                switch(row.Cells[6].Text)
+                switch(row.Cells[7].Text)
                 {
                     case "Placed":
                         {
