@@ -27,7 +27,7 @@ namespace FoodDelivery
         {
             Environment.SetEnvironmentVariable(
             "GOOGLE_APPLICATION_CREDENTIALS",
-            @"D:\timisoara-83e5b-firebase-adminsdk-64hs9-31b93d7503.json");
+            @"D:\fooddelivery-564e8-firebase-adminsdk-s0459-465242102c.json");
 
             await Firebase_Get_Data();
 
@@ -195,7 +195,7 @@ namespace FoodDelivery
         {
             int height = 500;
 
-            string url = "FoodShow.aspx?link=" + Server.UrlEncode(restaurantOrders.link) + "&name=" + Server.UrlEncode(restaurantOrders.name);
+            string url = "FoodShow.aspx?city=" + Server.UrlEncode(restaurantOrders.city) + "&name=" + Server.UrlEncode(restaurantOrders.name);
             string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=600');";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Food", script, true);
@@ -205,7 +205,7 @@ namespace FoodDelivery
         {
             int height = 150;
 
-            string url = "Discount.aspx?link=" + Server.UrlEncode(restaurantOrders.link) + "&name=" + Server.UrlEncode(restaurantOrders.name);
+            string url = "Discount.aspx?city=" + Server.UrlEncode(restaurantOrders.city) + "&name=" + Server.UrlEncode(restaurantOrders.name);
             string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=400');";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Food", script, true);

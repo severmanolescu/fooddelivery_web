@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Food" Language="C#" MasterPageFile="../MasterPages/MasterSignin.Master" Async="true" CodeBehind="FoodShow.aspx.cs" Inherits="FoodDelivery.FoodShow" %>
+﻿<%@ Page Title="Food" Language="C#" MasterPageFile="../MasterPages/MasterConnected.Master" Async="true" CodeBehind="FoodShow.aspx.cs" Inherits="FoodDelivery.FoodShow" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -39,9 +39,11 @@
                     <asp:TableCell><asp:Label runat="server">Image: </asp:Label></asp:TableCell>
                     <asp:TableCell><asp:FileUpload runat="server" accept="image/*" mutiple="false" ID="fileUpload" /></asp:TableCell>
                 </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell></asp:TableCell>
+                    <asp:TableCell><asp:Button runat="server" Text="Add" OnClick="AddFoodButton" ID="addFood_Button" /><br /></asp:TableCell>
+                </asp:TableRow>
             </asp:Table>
-
-            <asp:Button runat="server" Text="Add" OnClick="AddFoodButton" ID="addFood_Button" /><br />
 
             <asp:Label runat="server" ID="error_Label" ForeColor="Red" Visible="false">Can't send data to the database, please try again!</asp:Label>
 

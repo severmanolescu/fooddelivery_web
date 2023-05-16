@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Order
 {
-    public string link;
+    public string city;
     public string name;
     public List<Data> orders;
 }
@@ -34,9 +34,10 @@ public class OrderDetails
 
 public class Restaurant
 {
-    public string image;
+    public string logo;
     public string discount;
-    public List<Food> food;
+    public string name;
+    public List<Food> products;
 }
 
 public class Food

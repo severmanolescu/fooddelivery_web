@@ -15,13 +15,13 @@ namespace FoodDelivery
 {
     public partial class FoodShow : Page
     {
-        private string foodLink;
+        private string restaurantCity;
 
         private string restaurantName;
 
         protected async void Page_Load(object sender, EventArgs e)
         {
-            foodLink = Request.QueryString["link"];
+            restaurantCity = Request.QueryString["city"];
             restaurantName = Request.QueryString["name"];
             try
             {
@@ -80,9 +80,9 @@ namespace FoodDelivery
 
         private async Task GetData()
         {
-            var firebaseClient = new FirebaseClient(foodLink);
+            var firebaseClient = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            var restaurants = await firebaseClient.Child("Restaurants").OnceAsync<Restaurant>();
+            var restaurants = await firebaseClient.Child("Restaurants" + restaurantCity).OnceAsync<Restaurant>();
 
             if(restaurants != null)
             {
@@ -90,7 +90,7 @@ namespace FoodDelivery
                 {
                     if(restaurant.Key == restaurantName)
                     {
-                        ShowData(restaurant.Object.food);
+                        ShowData(restaurant.Object.products);
 
                         break;
                     }
@@ -100,13 +100,13 @@ namespace FoodDelivery
 
         private string UploadImage()
         {
-            string bucketName = "timisoara-83e5b.appspot.com";
+            string bucketName = "fooddelivery-564e8.appspot.com";
 
             string filePath = Path.Combine("D:\\Images", fileUpload.FileName);
 
             var storage = StorageClient.Create();
 
-            string url = @"https://storage.googleapis.com/timisoara-83e5b.appspot.com";
+            string url = @"https://storage.googleapis.com/fooddelivery-564e8.appspot.com";
 
             using (var fileStream = File.OpenRead(filePath))
             {
@@ -128,7 +128,7 @@ namespace FoodDelivery
         {
             try
             {
-                var firebase = new FirebaseClient(foodLink);
+                var firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
                 Food food = new Food { name = textbox_Name.Text, price = textbox_Price.Text};
 
@@ -143,7 +143,7 @@ namespace FoodDelivery
                     index = int.Parse(grid_Items.Rows[grid_Items.Rows.Count - 1].Cells[0].Text) + 1;
                 }
 
-                await firebase.Child("Restaurants").Child(restaurantName).Child("Food").Child((index).ToString).PutAsync(food);
+                await firebase.Child("Restaurants" + restaurantCity).Child(restaurantName).Child("Products").Child((index).ToString).PutAsync(food);
 
                 await GetData();
 
@@ -230,9 +230,9 @@ namespace FoodDelivery
 
         protected async void grid_Items_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            var firebase = new FirebaseClient(foodLink);
+            var firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            await firebase.Child("Restaurants").Child(restaurantName).Child("Food").Child(grid_Items.Rows[e.RowIndex].Cells[0].Text).DeleteAsync();
+            await firebase.Child("Restaurants" + restaurantCity).Child(restaurantName).Child("Products").Child(grid_Items.Rows[e.RowIndex].Cells[0].Text).DeleteAsync();
 
             await GetData();
         }

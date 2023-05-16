@@ -30,7 +30,7 @@
                     <br />
                     <br />
                     <br />
-                    <asp:Button ID="buttonEmail" runat="server" Text="Trimite e-mail" OnClick="buttonEmail_Click" />    
+                    <asp:Button ID="buttonEmail" runat="server" Text="Send us an e-mail" OnClick="buttonEmail_Click" />    
                 </div>
         </main>
     </asp:Panel>

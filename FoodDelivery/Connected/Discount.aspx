@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Food" Language="C#" MasterPageFile="../MasterPages/MasterSignin.Master" Async="true" CodeBehind="Discount.aspx.cs" Inherits="FoodDelivery.Discount" %>
+﻿<%@ Page Title="Food" Language="C#" MasterPageFile="../MasterPages/MasterConnected.Master" Async="true" CodeBehind="Discount.aspx.cs" Inherits="FoodDelivery.Discount" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">

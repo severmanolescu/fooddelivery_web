@@ -13,13 +13,13 @@ namespace FoodDelivery
 {
     public partial class Discount : Page
     {
-        private string foodLink;
+        private string restaurantCity;
 
         private string restaurantName;
 
         protected async void Page_Load(object sender, EventArgs e)
         {
-            foodLink = Request.QueryString["link"];
+            restaurantCity = Request.QueryString["city"];
             restaurantName = Request.QueryString["name"];
             try
             {
@@ -45,9 +45,9 @@ namespace FoodDelivery
 
         private async Task GetData()
         {
-            var firebaseClient = new FirebaseClient(foodLink);
+            var firebaseClient = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            var restaurants = await firebaseClient.Child("Restaurants").OnceAsync<Restaurant>();
+            var restaurants = await firebaseClient.Child("Restaurants" + restaurantCity).OnceAsync<Restaurant>();
 
             if(restaurants != null)
             {
@@ -67,9 +67,9 @@ namespace FoodDelivery
         {
             try
             {
-                var firebase = new FirebaseClient(foodLink);
+                var firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-                await firebase.Child("Restaurants").Child(restaurantName).Child("Discount").PutAsync(textBoxDiscount.Text);
+                await firebase.Child("Restaurants" + restaurantCity).Child(restaurantName).Child("Discount").PutAsync(textBoxDiscount.Text);
             }
             catch
             {
