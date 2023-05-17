@@ -257,3 +257,7 @@ D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Apis.Storage.v1.xml
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.pdb
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\Google.Cloud.Storage.V1.xml
 D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\FirebaseNetAdmin.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\FirebaseCoreSDK.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\System.Reflection.TypeExtensions.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\UrlCombineLib.dll
+D:\Facultate\ADA\fooddelivery_web\FoodDelivery\bin\BouncyCastle.Crypto.xml

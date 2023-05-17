@@ -40,7 +40,7 @@ namespace FoodDelivery
 
             firebase.Child("Restaurants").AsObservable<object>().Subscribe(async data =>
             {
-                 await Firebase_Get_Data();
+                labelUpdates.Text = "Looking for updates...";
             });
         }
 
@@ -83,6 +83,14 @@ namespace FoodDelivery
             }
         }
 
+        protected async void Timer1_Tick(object sender, EventArgs e)
+        {
+            if(labelUpdates.Text == "Looking for updates...")
+            {
+                await Firebase_Get_Data();
+            }
+        }
+
         private void AddOrdersToTable()
         {
             DataTable dataTable = new DataTable();
@@ -102,7 +110,9 @@ namespace FoodDelivery
             }
 
             grid_Orders.DataSource = dataTable;
-            grid_Orders.DataBind();         
+            grid_Orders.DataBind();
+
+            labelUpdates.Text = "Updated!";
         }
 
         private async Task Firebase_Get_Data()

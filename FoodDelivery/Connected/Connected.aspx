@@ -4,7 +4,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <asp:Panel runat="server" Width="100%">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" runat="server" href="~/">Food Atlas</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -14,8 +14,10 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="Connected.aspx">Orders</a></li>
-                        <li class="nav-item"><asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Food" OnClick="FoodPageLoad"></asp:Button></li>
-                        <li class="nav-item"><asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Discount" OnClick="DiscountPageLoad"></asp:Button></li>
+                        <li class="nav-item">
+                            <asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Food" OnClick="FoodPageLoad"></asp:Button></li>
+                        <li class="nav-item">
+                            <asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Discount" OnClick="DiscountPageLoad"></asp:Button></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="ContactConnected.aspx">Contact</a></li>
                     </ul>
                 </div>
@@ -25,24 +27,32 @@
 
     <main aria-labelledby="title">
 
-        <asp:Panel ID="panel_orders" runat="server">
+        <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
+      
+        <asp:Label runat="server" ID="labelUpdates">Up to date!</asp:Label>
 
-            <asp:GridView ID="grid_Orders" runat="server" Width="100%" AllowSelection="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowCustomPaging="True" AutoGenerateColumns="False" AllowSorting="True" OnRowDataBound="OnRowDataBound">
-                <Columns>
-                    <asp:BoundField DataField="NO" HeaderText="NO" />
-                    <asp:BoundField DataField="Items" HeaderText="Items" />
-                    <asp:BoundField DataField="Address" HeaderText="Address" />
-                    <asp:BoundField DataField="Person" HeaderText="Person" />
-                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                    <asp:BoundField DataField="Date" HeaderText="Date" />
-                    <asp:BoundField DataField="Price" HeaderText="Price" />
-                    <asp:BoundField DataField="Status" HeaderText="Status" />
+        <asp:UpdatePanel runat="server" ID="updatePanel" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:Panel ID="panel_orders" runat="server">
 
-                    <asp:CommandField ShowSelectButton="True"></asp:CommandField>
-                </Columns>
-            </asp:GridView>
+                    <asp:GridView ID="grid_Orders" runat="server" Width="100%" AllowSelection="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowCustomPaging="True" AutoGenerateColumns="False" AllowSorting="True" OnRowDataBound="OnRowDataBound">
+                        <Columns>
+                            <asp:BoundField DataField="NO" HeaderText="NO" />
+                            <asp:BoundField DataField="Items" HeaderText="Items" />
+                            <asp:BoundField DataField="Address" HeaderText="Address" />
+                            <asp:BoundField DataField="Person" HeaderText="Person" />
+                            <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                            <asp:BoundField DataField="Date" HeaderText="Date" />
+                            <asp:BoundField DataField="Price" HeaderText="Price" />
+                            <asp:BoundField DataField="Status" HeaderText="Status" />
 
-        </asp:Panel>
+                            <asp:CommandField ShowSelectButton="True"></asp:CommandField>
+                        </Columns>
+                    </asp:GridView>
+
+                </asp:Panel>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
     </main>
 </asp:Content>
