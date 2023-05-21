@@ -8,11 +8,6 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using Google.Cloud.Storage.V1;
 using System.IO;
-using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
-using FirebaseAdmin.Auth;
-using Firebase.Auth;
-using Google.Apis.Storage.v1.Data;
 
 namespace FoodDelivery
 {

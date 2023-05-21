@@ -60,26 +60,29 @@ namespace FoodDelivery
         {
             int orderIndex = 0;
 
-            foreach (Data data in restaurantOrders.orders)
+            if(restaurantOrders != null && restaurantOrders.orders != null)
             {
-                if(data.status == status)
+                foreach (Data data in restaurantOrders.orders)
                 {
-                    data.index = orderIndex;
+                    if (data.status == status)
+                    {
+                        data.index = orderIndex;
 
-                    DataRow dataRow = dataTable.NewRow();
+                        DataRow dataRow = dataTable.NewRow();
 
-                    dataRow["NO"] = orderIndex;
-                    dataRow["Items"] = GetStringItems(data.items);
-                    dataRow["Address"] = data.address;
-                    dataRow["Person"] = data.person;
-                    dataRow["Phone"] = data.phone;
-                    dataRow["Date"] = data.date.ToString("dd/MM/yyyy");
-                    dataRow["Status"] = data.status;
-                    dataRow["Price"] = data.price;
+                        dataRow["NO"] = orderIndex;
+                        dataRow["Items"] = GetStringItems(data.items);
+                        dataRow["Address"] = data.address;
+                        dataRow["Person"] = data.person;
+                        dataRow["Phone"] = data.phone;
+                        dataRow["Date"] = data.date.ToString("dd/MM/yyyy");
+                        dataRow["Status"] = data.status;
+                        dataRow["Price"] = data.price;
 
-                    dataTable.Rows.Add(dataRow);
+                        dataTable.Rows.Add(dataRow);
+                    }
+                    orderIndex += 1;
                 }
-                orderIndex += 1;
             }
         }
 

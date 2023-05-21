@@ -24,24 +24,6 @@ namespace FoodDelivery
         protected global::System.Web.UI.Timer Timer1;
 
         /// <summary>
-        /// labelUpdates control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelUpdates;
-
-        /// <summary>
-        /// updatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanel;
-
-        /// <summary>
         /// panel_orders control.
         /// </summary>
         /// <remarks>
@@ -58,5 +40,14 @@ namespace FoodDelivery
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grid_Orders;
+
+        /// <summary>
+        /// labelUpdates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelUpdates;
     }
 }

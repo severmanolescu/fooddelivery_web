@@ -14,6 +14,7 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="Connected.aspx">Orders</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="ContactConnected.aspx">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="../Initial/Signin.aspx">Sign out</a></li>
                     </ul>
                 </div>
             </div>

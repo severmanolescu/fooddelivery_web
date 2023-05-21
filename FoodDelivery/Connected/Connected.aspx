@@ -19,6 +19,7 @@
                         <li class="nav-item">
                             <asp:Button class="nav-link" BackColor="Transparent" BorderColor="Transparent" runat="server" Text="Discount" OnClick="DiscountPageLoad"></asp:Button></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="ContactConnected.aspx">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="../Initial/Signin.aspx">Sign out</a></li>
                     </ul>
                 </div>
             </div>
@@ -28,31 +29,26 @@
     <main aria-labelledby="title">
 
         <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
-      
+
+        <asp:Panel ID="panel_orders" runat="server">
+
+            <asp:GridView ID="grid_Orders" runat="server" Width="100%" AllowSelection="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowCustomPaging="True" AutoGenerateColumns="False" AllowSorting="True" OnRowDataBound="OnRowDataBound">
+                <Columns>
+                    <asp:BoundField DataField="NO" HeaderText="NO" />
+                    <asp:BoundField DataField="Items" HeaderText="Items" />
+                    <asp:BoundField DataField="Address" HeaderText="Address" />
+                    <asp:BoundField DataField="Person" HeaderText="Person" />
+                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                    <asp:BoundField DataField="Date" HeaderText="Date" />
+                    <asp:BoundField DataField="Price" HeaderText="Price" />
+                    <asp:BoundField DataField="Status" HeaderText="Status" />
+
+                    <asp:CommandField ShowSelectButton="True"></asp:CommandField>
+                </Columns>
+            </asp:GridView>
+
+        </asp:Panel>
+
         <asp:Label runat="server" ID="labelUpdates">Up to date!</asp:Label>
-
-        <asp:UpdatePanel runat="server" ID="updatePanel" UpdateMode="Conditional">
-            <ContentTemplate>
-                <asp:Panel ID="panel_orders" runat="server">
-
-                    <asp:GridView ID="grid_Orders" runat="server" Width="100%" AllowSelection="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowCustomPaging="True" AutoGenerateColumns="False" AllowSorting="True" OnRowDataBound="OnRowDataBound">
-                        <Columns>
-                            <asp:BoundField DataField="NO" HeaderText="NO" />
-                            <asp:BoundField DataField="Items" HeaderText="Items" />
-                            <asp:BoundField DataField="Address" HeaderText="Address" />
-                            <asp:BoundField DataField="Person" HeaderText="Person" />
-                            <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                            <asp:BoundField DataField="Date" HeaderText="Date" />
-                            <asp:BoundField DataField="Price" HeaderText="Price" />
-                            <asp:BoundField DataField="Status" HeaderText="Status" />
-
-                            <asp:CommandField ShowSelectButton="True"></asp:CommandField>
-                        </Columns>
-                    </asp:GridView>
-
-                </asp:Panel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-
     </main>
 </asp:Content>
