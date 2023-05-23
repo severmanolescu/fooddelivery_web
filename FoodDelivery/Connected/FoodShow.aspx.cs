@@ -1,13 +1,13 @@
-﻿using System;
-using System.Web.UI;
-using System.Data;
-using System.Web.UI.WebControls;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Firebase.Database;
+﻿using Firebase.Database;
 using Firebase.Database.Query;
 using Google.Cloud.Storage.V1;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using System.Threading.Tasks;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace FoodDelivery
 {
@@ -82,11 +82,11 @@ namespace FoodDelivery
 
             var restaurants = await firebaseClient.Child("Restaurants" + restaurantCity).OnceAsync<Restaurant>();
 
-            if(restaurants != null)
+            if (restaurants != null)
             {
-                foreach(var restaurant in restaurants)
+                foreach (var restaurant in restaurants)
                 {
-                    if(restaurant.Key == restaurantName)
+                    if (restaurant.Key == restaurantName)
                     {
                         ShowData(restaurant.Object.products);
 
@@ -128,7 +128,7 @@ namespace FoodDelivery
             {
                 var firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-                Food food = new Food { name = textbox_Name.Text, price = textbox_Price.Text};
+                Food food = new Food { name = textbox_Name.Text, price = textbox_Price.Text };
 
                 string url = UploadImage();
 
@@ -136,7 +136,7 @@ namespace FoodDelivery
 
                 int index = 0;
 
-                if(grid_Items != null && grid_Items.Rows.Count > 0)
+                if (grid_Items != null && grid_Items.Rows.Count > 0)
                 {
                     index = int.Parse(grid_Items.Rows[grid_Items.Rows.Count - 1].Cells[0].Text) + 1;
                 }
@@ -168,7 +168,7 @@ namespace FoodDelivery
         {
             addFood_Button.Enabled = false;
 
-            if(CheckData())
+            if (CheckData())
             {
                 await SendData();
             }
@@ -178,9 +178,9 @@ namespace FoodDelivery
 
         private bool CheckFoodName()
         {
-            foreach(GridViewRow row in grid_Items.Rows) 
+            foreach (GridViewRow row in grid_Items.Rows)
             {
-                if(row.Cells.Count > 0 && row.Cells[1].Text == textbox_Name.Text) 
+                if (row.Cells.Count > 0 && row.Cells[1].Text == textbox_Name.Text)
                 {
                     error_Label.Text = "This item already exist, please insert another one!";
 
@@ -197,7 +197,7 @@ namespace FoodDelivery
 
         private bool CheckData()
         {
-            if(textbox_Name.Text != string.Empty && textbox_Price.Text != string.Empty && fileUpload.HasFile)
+            if (textbox_Name.Text != string.Empty && textbox_Price.Text != string.Empty && fileUpload.HasFile)
             {
                 try
                 {

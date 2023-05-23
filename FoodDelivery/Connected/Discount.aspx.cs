@@ -1,13 +1,8 @@
-﻿using System;
-using System.Web.UI;
-using System.Data;
-using System.Web.UI.WebControls;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Firebase.Database;
+﻿using Firebase.Database;
 using Firebase.Database.Query;
-using System.Web.DynamicData;
-using System.Windows.Forms;
+using System;
+using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace FoodDelivery
 {
@@ -49,11 +44,11 @@ namespace FoodDelivery
 
             var restaurants = await firebaseClient.Child("Restaurants" + restaurantCity).OnceAsync<Restaurant>();
 
-            if(restaurants != null)
+            if (restaurants != null)
             {
-                foreach(var restaurant in restaurants)
+                foreach (var restaurant in restaurants)
                 {
-                    if(restaurant.Key == restaurantName)
+                    if (restaurant.Key == restaurantName)
                     {
                         ShowData(restaurant.Object.discount);
 

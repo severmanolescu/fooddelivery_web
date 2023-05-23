@@ -1,7 +1,7 @@
-﻿using System;
-using System.Web.UI;
-using Firebase.Auth;
+﻿using Firebase.Auth;
+using System;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace FoodDelivery
@@ -21,11 +21,11 @@ namespace FoodDelivery
 
             bool validPassword = text_password.Text != String.Empty ? true : false;
 
-            if(validEmail == false)
+            if (validEmail == false)
             {
                 label_error_email.Visible = true;
             }
-            else 
+            else
             {
                 label_error_email.Visible = false;
             }
@@ -41,7 +41,7 @@ namespace FoodDelivery
 
             return validEmail && validPassword;
         }
-        
+
         static async Task<FirebaseAuthLink> Try_To_Connect(String email, String password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyBF7qaCQxjHkDZC2fKKxKFAMeJB5w2HYP8"));
@@ -62,7 +62,7 @@ namespace FoodDelivery
         {
             var task = await Try_To_Connect(email.Text, password.Text);
 
-            if(task != null)
+            if (task != null)
             {
                 return task.User.LocalId;
             }
@@ -76,7 +76,7 @@ namespace FoodDelivery
             {
                 Task<String> task = Task<String>.Run(async () => await Wait_To_Sign_in(text_email, text_password));
 
-                if(task.Result == String.Empty)
+                if (task.Result == String.Empty)
                 {
                     label_error_signin.Visible = true;
                 }

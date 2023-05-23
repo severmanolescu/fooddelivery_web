@@ -1,27 +1,26 @@
-﻿using System;
-using System.Drawing;
+﻿using Firebase.Database;
+using System;
 using System.Data;
+using System.Drawing;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Firebase.Database;
-using System.Collections.Generic;
 
 namespace FoodDelivery
 {
     public partial class Connected : Page
     {
-        Order restaurantOrders;
+        Restaurant restaurantOrders;
 
-        Color lightRed =         Color.FromArgb(2, 252, 212, 212);
-        Color lightYellow =      Color.FromArgb(2, 250, 250, 212);
-        Color lightGreen =       Color.FromArgb(2, 214, 250, 212);
+        Color lightRed = Color.FromArgb(2, 252, 212, 212);
+        Color lightYellow = Color.FromArgb(2, 250, 250, 212);
+        Color lightGreen = Color.FromArgb(2, 214, 250, 212);
         Color lightYellowGreen = Color.FromArgb(2, 253, 250, 212);
-        Color lightBlue =        Color.FromArgb(2, 212, 215, 250);
+        Color lightBlue = Color.FromArgb(2, 212, 215, 250);
 
-        string[] ordersOrder = { "Placed", "Accepted", "Out for Delivery", "Delivered", "Completed", "Canceled" };
+        string[] ordersOrder = { "Order Placed", "Accepted", "Out for Delivery", "Delivered", "Completed", "Canceled" };
 
         protected async void Page_Load(object sender, EventArgs e)
         {
@@ -38,45 +37,33 @@ namespace FoodDelivery
         {
             FirebaseClient firebase = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            firebase.Child("Restaurants").AsObservable<object>().Subscribe(async data =>
-            {
-                labelUpdates.Text = "Looking for updates...";
-            });
-        }
-
-        private string GetStringItems(List<Item> items)
-        {
-            string itemsString = "";
-
-            foreach (Item item in items)
-            {
-                itemsString += item.name + " ";
-            }
-
-            return itemsString;
+            //firebase.Child("Restaurant").AsObservable<object>().Subscribe(async data =>
+            //{
+            //    labelUpdates.Text = "Looking for updates...";
+            //});
         }
 
         private void AddOrdersWithStatus(DataTable dataTable, string status)
         {
             int orderIndex = 0;
 
-            if(restaurantOrders != null && restaurantOrders.orders != null)
+            if (restaurantOrders != null && restaurantOrders.orders != null)
             {
                 foreach (Data data in restaurantOrders.orders)
                 {
-                    if (data.status == status)
+                    if (data.deliveryStatus == status)
                     {
                         data.index = orderIndex;
 
                         DataRow dataRow = dataTable.NewRow();
 
                         dataRow["NO"] = orderIndex;
-                        dataRow["Items"] = GetStringItems(data.items);
+                        dataRow["Items"] = data.name;
                         dataRow["Address"] = data.address;
-                        dataRow["Person"] = data.person;
+                        dataRow["Person"] = data.username;
                         dataRow["Phone"] = data.phone;
-                        dataRow["Date"] = data.date.ToString("dd/MM/yyyy");
-                        dataRow["Status"] = data.status;
+                        dataRow["Date"] = data.date;
+                        dataRow["Status"] = data.deliveryStatus;
                         dataRow["Price"] = data.price;
 
                         dataTable.Rows.Add(dataRow);
@@ -88,7 +75,7 @@ namespace FoodDelivery
 
         protected async void Timer1_Tick(object sender, EventArgs e)
         {
-            if(labelUpdates.Text == "Looking for updates...")
+            if (labelUpdates.Text == "Looking for updates...")
             {
                 await Firebase_Get_Data();
             }
@@ -107,7 +94,7 @@ namespace FoodDelivery
             dataTable.Columns.Add("Price", typeof(int));
             dataTable.Columns.Add("Status", typeof(string));
 
-            foreach(string order in ordersOrder)
+            foreach (string order in ordersOrder)
             {
                 AddOrdersWithStatus(dataTable, order);
             }
@@ -122,17 +109,27 @@ namespace FoodDelivery
         {
             var firebaseClient = new FirebaseClient("https://fooddelivery-564e8-default-rtdb.firebaseio.com/");
 
-            var orders = await firebaseClient.Child("Restaurants").OnceAsync<Order>();
+            var restaurants = await firebaseClient.Child("RestaurantDetails").OnceAsync<RestaurantDetails>();
 
-            foreach(var order in orders)
+            foreach (var restaurant in restaurants)
             {
-                if(order.Key == Application["user_id"].ToString())
+                if (restaurant.Key == Application["user_id"].ToString())
                 {
-                    restaurantOrders = order.Object;
+                    var orders = await firebaseClient.Child("Restaurants" + restaurant.Object.city).OnceAsync<Restaurant>();
 
-                    AddOrdersToTable();
+                    foreach (var order in orders)
+                    {
+                        if (order.Key == restaurant.Object.name.ToString())
+                        {
+                            restaurantOrders = order.Object;
 
-                    break;
+                            restaurantOrders.city = restaurant.Object.city;
+
+                            AddOrdersToTable();
+
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -141,9 +138,9 @@ namespace FoodDelivery
         {
             foreach (GridViewRow row in grid_Orders.Rows)
             {
-                switch(row.Cells[7].Text)
+                switch (row.Cells[7].Text)
                 {
-                    case "Placed":
+                    case "Order Placed":
                         {
                             row.BackColor = lightBlue;
 
@@ -187,16 +184,18 @@ namespace FoodDelivery
         {
             GridViewRow row = grid_Orders.SelectedRow;
 
-            OrderDetails orderDetails = new OrderDetails();
-
-            orderDetails.data = restaurantOrders.orders[row.RowIndex];
-            orderDetails.restaurantID = Application["user_id"].ToString();
+            OrderDetails orderDetails = new OrderDetails()
+            {
+                data = restaurantOrders.orders[row.RowIndex],
+                city = restaurantOrders.city,
+                name = restaurantOrders.name
+            };
 
             var json = new JavaScriptSerializer().Serialize(orderDetails);
 
             var encodedData = HttpUtility.UrlEncode(json);
 
-            int height = 300 + orderDetails.data.items.Count * 40;
+            int height = 300;
 
             string url = "OrderView.aspx?data=" + encodedData;
             string script = "var popup = window.open('" + url + "', '_blank', 'height=" + height.ToString() + ",width=600');";

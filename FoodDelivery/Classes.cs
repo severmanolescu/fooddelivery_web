@@ -1,5 +1,10 @@
-using System;
 using System.Collections.Generic;
+
+public class RestaurantDetails
+{
+    public string city;
+    public string name;
+}
 
 public class Order
 {
@@ -12,12 +17,12 @@ public class Data
 {
     public int index;
     public string address;
-    public DateTime date;
-    public List<Item> items;
-    public string person;
+    public string date;
+    public string name;
+    public string username;
     public string phone;
-    public string status;
-    public int price;
+    public string deliveryStatus;
+    public string price;
 }
 
 public class Item
@@ -29,15 +34,17 @@ public class Item
 public class OrderDetails
 {
     public Data data;
-    public string restaurantID;
+    public string name;
+    public string city;
 }
 
 public class Restaurant
 {
-    public string logo;
     public string discount;
     public string name;
+    public string city;
     public List<Food> products;
+    public List<Data> orders;
 }
 
 public class Food
