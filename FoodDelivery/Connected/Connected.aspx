@@ -28,7 +28,7 @@
 
     <main aria-labelledby="title">
 
-        <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
+<!--        <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>     -->
 
         <asp:Panel ID="panel_orders" runat="server">
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Net.Http;
 using System.Text;
 using System.Web;
@@ -43,35 +44,24 @@ namespace FoodDelivery
 
         private void Show_Items()
         {
-            //if(orderDetails.data.items != null)
-            //{
-            //    DataTable dataTable = new DataTable();
+            DataTable dataTable = new DataTable();
 
-            //    dataTable.Columns.Add("NO", typeof(int));
-            //    dataTable.Columns.Add("Name", typeof(string));
-            //    dataTable.Columns.Add("Amount", typeof(int));
+            dataTable.Columns.Add("NO", typeof(int));
+            dataTable.Columns.Add("Name", typeof(string));
+            dataTable.Columns.Add("Amount", typeof(int));
 
-            //    int itemIndex = 0;
 
-            //    foreach (Item item in orderDetails.data.items)
-            //    {
-            //        if(item != null)
-            //        {
-            //            itemIndex += 1;
+                
+            dataTable.Rows.Add(0,
+                                orderDetails.data.name,
+                                1);
 
-            //            dataTable.Rows.Add(itemIndex,
-            //                               item.name,
-            //                               item.amount);
+            grid_Items.DataSource = null;
 
-            //            grid_Items.DataSource = null;
-            //        }
-            //    }
+            label_Price.Text += orderDetails.data.price.ToString();
 
-            //    label_Price.Text += orderDetails.data.price.ToString();
-
-            //    grid_Items.DataSource = dataTable;
-            //    grid_Items.DataBind();
-            //}
+            grid_Items.DataSource = dataTable;
+            grid_Items.DataBind();
         }
 
         private void Show_Data()
